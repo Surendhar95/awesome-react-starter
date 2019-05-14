@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack")
+var path = require('path')
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
   filename: "./index.html",
@@ -10,15 +11,16 @@ module.exports = {
      './src'
   ],
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: [".js", ".json"]
   },
   output: {
-    publicPath: "/"
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     historyApiFallback: true,
     hot: true,
-    contentBase: './src'
+    contentBase: './dist'
   },
   devtool: 'source-map',
   module: {
@@ -34,7 +36,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf)$/,
+        test: /\.(png|woff|woff2|eot|ttf|ico)$/,
         loader: 'url-loader?limit=100000'
       },
       {
@@ -93,7 +95,6 @@ module.exports = {
     ]
   },
   plugins: [
-    htmlWebpackPlugin,
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify("staging") })
+    htmlWebpackPlugin
   ]
 };
