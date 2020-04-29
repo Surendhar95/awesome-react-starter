@@ -1,7 +1,8 @@
-# Node Modules
+# node_modules 
+/node_modules
 
-node_modules/
+#git-crypt symmetric master key
+/.git-crypt
 
-# project
-
-dist/
+#environment local
+/environments/.env.development

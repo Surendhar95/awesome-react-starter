@@ -1,6 +1,2 @@
-# React-Boilerplate
-This is my react-boilerplate
-## Setup
-npm install
-npm run build
-npm start
+# cm-react-boilerplate
+Simple and lightweight boilerplate for react applications

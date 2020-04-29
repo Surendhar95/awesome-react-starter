@@ -1,0 +1,49 @@
+# name: Continuous Delivery 
+# on: 
+#   push:
+#     # branch on which you want to run this workflow
+#     branches:
+#       - develop      
+# jobs:
+#   build:
+#     name: Install dependenncies, build and deploy the application
+#     runs-on: ubuntu-latest    
+#     steps:
+#       - uses: actions/checkout@v1
+
+#       - name: Setup node version
+#         uses: actions/setup-node@v1
+#         with:
+#           # change node version of virtual environment here
+#           node-version: '8.9.0'
+      
+#       - name: Install Dependencies
+#         run: npm i
+
+#       - name: Decrypt git-crypt locked files
+#         uses: sliteteam/github-action-git-crypt-unlock@1.0.2
+#         env:
+#            GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+          
+#       - name: Build
+#         run: npm run build
+      
+#       - name: Generate build number
+#         uses: einaregilsson/build-number@v2 
+#         with:
+#           token: ${{secrets.github_token}}   
+
+#       - name: Generate deployment package for deployment
+#         run: zip deploy.zip *.js *.json *.html *.css
+
+#       # Change all the credentials here for deployment to AWS EBS
+#       - name: Deploy to AWS EBS
+#         uses: einaregilsson/beanstalk-deploy@v5
+#         with:
+#           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           application_name: APP_NAME
+#           environment_name: APP_ENV_NAME
+#           version_label: "${{PROJECT_NAME}}-build-v${{ steps.buildnumber.outputs.build_number }}
+#           region: eu-west-1
+#           deployment_package: deploy.zip
